@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>A-Team Rentals | Cars</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href='https://fonts.googleapis.com/css?family=Archivo+Narrow:400,700|Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+<link href="css/main.css" rel="stylesheet" type="text/css" media="all" />
+{% if admin %}
+<link href="css/2col.css" rel="stylesheet" type="text/css" media="all" />
+{% else %}
+<link href="css/wide.css" rel="stylesheet" type="text/css" media="all" />
+{% endif %}
+<link href="css/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui-1.10.3.custom.js"></script>		
+<script>
+$(function() {
+	$( "#checkin" ).datepicker({
+		defaultDate: "0",
+		changeMonth: true,
+		numberOfMonths: 1,
+		onClose: function( selectedDate ) {
+			var newdate = new Date(Date.parse(selectedDate));
+			newdate.setDate(newdate.getDate() + 1);
+			$( "#checkout" ).datepicker( "option", "minDate", newdate);
+		}
+	});
+	$( "#checkout" ).datepicker({
+		defaultDate: "1",
+		changeMonth: true,
+		numberOfMonths: 1,
+		onClose: function( selectedDate ) {
+			var newdate = new Date(Date.parse(selectedDate));
+			newdate.setDate(newdate.getDate() - 1);
+			$( "#checkin" ).datepicker( "option", "maxDate", newdate );
+		}
+	});
+});
+</script>
+<style type="text/css">		
+.error {color:red}
+</style>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1><a href="/">A-Team Rentals</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="/" accesskey="1" title="">Home</a></li>
+					<li><a href="/browse" accesskey="2" title="">Browse</a></li>
+					<li><a href="/signin" accesskey="3" title="">Log-in / Register</a></li>
+					<li class="active"><a href="/account" accesskey="4" title="">Account</a></li>
+					<li><a href="/logout" accesskey="5" title="">Log-out</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="banner" class="container"><img src="img/car_banner.jpg" width="1002" height="222" alt="banner" /></div>
+	<div id="page" class="container">
+		<div id="content">
+			<div style="margin-bottom:0px;">
+				<h2 class="title">Cars</h2>
+			</div>
+			<div>
+				<ul class="style1" style="margin-bottom:0px;padding: 0px 0px 0px 0px;">
+					{% for car in carlist %}
+					{% if loop.index0 == 0 %}
+					<li class="first" style="margin-bottom:0px;padding 0px 0px 0px 0px;">
+					{% else %}
+					<li style="margin-bottom:0px">
+					{% endif %}
+						<table style="text-align:left;margin-bottom:20px">
+							<tr>
+								<td>ID:</td>
+								<td><div class="table-space2">{{car.car_id}}</div></td>
+								<td>Type:</td>
+								<td><div class="table-space2">{{car.car_type}}</div></td>
+							</tr>
+							<tr>
+								<td>Make:</td>
+								<td><div class="table-space2">{{car.car_make}}</div></td>
+								<td>Model:</td>
+								<td><div class="table-space2">{{car.car_model}}</div></td>
+							</tr>
+							<tr>
+								<td>Seating Capacity:</td>
+								<td><div class="table-space2">{{car.car_seats}}</div></td>
+								<td>MPG:</td>
+								<td><div class="table-space2">{{car.car_mpg}}</div></td>
+							</tr>
+						</table>
+							{% if not car.reservations %}          
+								<h3 style="margin-bottom: 0px;padding: 0px 0px 0px 0px;">No Reservations</h3>
+							{% else %}
+								<h3 style="margin-bottom: 0px;">Reservations:</h3>
+								{% for res in car.reservations %}
+								<table style="text-align:left;margin-bottom:10px">						
+									<tr>
+										<td>Reservation #:</td>
+										<td><div class="table-space2">{{res_dict[res].res_id}}</div></td>
+									</tr>
+									<tr>
+										<td>Checkin:</td>
+										<td><div class="table-space2">{{res_dict[res].checkin}}</div></td>
+										<td>Checkout:</td>
+										<td><div class="table-space2">{{res_dict[res].checkout}}</div></td>
+									</tr>
+								</table>
+								{% endfor %}
+							{% endif %}
+					</li>            
+					{%endfor%}
+				</ul>
+			</div>
+		</div>
+		{% if admin %}
+		<div id="sidebar">
+			<h2>Admin Links</h2>
+			<ul class="style3">
+				<li class="first">
+					<p class="date"><a href="/user-accounts">Accounts</a></p>
+					<p class="date"><a href="/view-cars">Cars</a></p>
+					<p class="date"><a href="/view-reservations">Reservations</a></p>
+					<p class="date"><a href="/car-init">Initialization</a></p>
+				</li>
+			</ul>
+		</div>
+		{% endif %}
+	</div>
+	
+	<div id="footer">
+		<p>Copyright (c)car-rentals.appspot.com. All rights reserved.</p>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Sign Up</title>
+        <style type="text/css">
+        .label {text-align: right}
+        .error {color:red}
+        </style>
+    </head>
+    
+    <body>
+        <h2>Signup</h2>
+        <form method="post">
+            <table>
+                <tr>
+                    <td class="label">
+                        First Name                       
+                    </td>
+                    <td>
+                        <input type="text" name="first" value="{{first}}">
+                    </td>
+                    <td >
+                        <span class="error">{{f_err}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        Last Name                       
+                    </td>
+                    <td>
+                        <input type="text" name="last" value="{{last}}">
+                    </td>
+                    <td >
+                        <span class="error">{{l_err}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        Username                       
+                    </td>
+                    <td>
+                        <input type="text" name="username" value="{{username}}">
+                    </td>
+                    <td >
+                        <span class="error">{{u_err}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        Password                       
+                    </td>
+                    <td>
+                        <input type="password" name="password" value="{{password}}">
+                    </td>
+                    <td >
+                        <span class="error">{{p_err}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        Verify Password                       
+                    </td>
+                    <td>
+                        <input type="password" name="verify" value="{{verify}}">
+                    </td>
+                    <td >
+                        <span class="error">{{v_err}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        Email                       
+                    </td>
+                    <td>
+                        <input type="text" name="email" value="{{email}}">
+                    </td>
+                    <td >
+                        <span class="error">{{e_err}}</span>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit">
+        </form>
+    </body>
+ </html>
+    

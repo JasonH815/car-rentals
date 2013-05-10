@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Account Page</title>
+        <style type="text/css">
+        .label {text-align: left}
+        .error {color:red}
+        td {padding: 5px}
+        </style>
+    </head>
+    
+    <body>
+        <h2>My Account</h2>
+        <hr>
+            
+        <table>
+            <tr>
+                <td class="label">User:</td>
+                <td><div>{{account.username}}</div></td>
+            </tr>
+            <tr>
+                <td class="label">First Name:</td>
+                <td><div>{{account.firstname}}</div></td>
+                <td class="label">Last Name:</td>
+                <td><div>{{account.lastname}}</div></td>
+            </tr>
+            <tr>
+                <td class="label">Email Address:</td>
+                <td><div>{{account.email}}</div></td>
+                <td class="label">Member Since:</td>
+                <td><div>{{account.created.strftime('%b %d, %Y')}}</div></td>
+            </tr>            
+        </table>
+        <h4>Reservations:</h4>
+        {% if not account.reservations %}
+		<p>No reservations.</p>
+		{% else %}
+			{% for res in account.reservations %}
+			<table>
+				<tr>
+					<td class="label">Reservation #:</td>
+					<td><div>{{res_dict[res].res_id}}</div></td>
+					 <td class="label">Pick-Up:</td>
+					<td><div>{{res_dict[res].checkin}}</div></td>
+					 <td class="label">Return:</td>
+					<td><div>{{res_dict[res].checkout}}</div></td>            
+					<td class="label">Car Type:</td>
+					<td><div>{{car_dict[res].car_type}}</div></td>
+					<td>
+						<form method="post">
+							<input type="submit" name="delete" value="Delete">
+							<input type="hidden" name="res_id" value="{{res_dict[res].res_id}}">					
+						</form>
+					</td>
+				</tr>
+			</table>
+			{% endfor %}
+        {% endif %}
+    </body>
+ </html>
+    

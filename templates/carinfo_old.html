@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Account Page</title>
+        <style type="text/css">
+        .label {text-align: left}
+        .error {color:red}
+        td {padding: 5px}
+        </style>
+    </head>
+    
+    <body>
+		{% if instock %}
+			<h2>Car Information</h2>
+			<hr>
+				
+			<table>
+				<tr>
+					<td class="label">Type:</td>
+					<td><div>{{car.car_type}}</div></td>
+				</tr>
+				<tr>
+					<td class="label">Make:</td>
+					<td><div>{{car.car_make}}</div></td>
+					<td class="label">Model:</td>
+					<td><div>{{car.car_model}}</div></td>
+				</tr>
+				<tr>
+					<td class="label">Seating Capacity:</td>
+					<td><div>{{car.car_seats}}</div></td>
+					<td class="label">MPG:</td>
+					<td><div>{{car.car_mpg}}</div></td>
+				</tr>            
+			</table>
+			{% if logged_in %}
+				<form method="post">
+					<input type="submit" name="checkout" value="Reserve Now">
+				</form>
+			{% else %}
+				<div class="error">Please sign in <a href="/signin"><b>here</b></a> to rent this car.</div>
+			{% endif %}
+		{% else %}
+			<div>The selected car is not instock for these dates.</div>
+			<a href="/browse">Return.</a>
+		{% endif %}
+    </body>
+ </html>
+    

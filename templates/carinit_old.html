@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Car database intialization</title>
+        <style type="text/css">
+        .label {text-align: left}
+        .error {color:red}
+        td {padding: 5px}
+        </style>
+    </head>
+    
+    <body>
+        <h2>Car database initialization</h2>
+        <hr>
+        <p class="error"><b>WARNING:</b> The delete everything button will completeley erase all cars and reservations 
+        from the database!</p>
+        <p>{{msg}}</p>
+        <form method="post">
+					{% if not created %}
+					<input type="submit" name="addcars" value="Add Cars">
+					{% else %}
+					<input type="submit" name="delete" value="Delete Everything!">
+					{%endif%}				
+        </form>
+    </body>
+ </html>
+    

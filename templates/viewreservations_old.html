@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>All Reservations</title>
+        <style type="text/css">
+        .label {text-align: left}
+        .error {color:red}
+        td {padding: 5px}
+        </style>
+        
+    </head>
+    
+    <body>
+        <h2>Reservations</h2>
+        <hr>
+            
+        {% for res in reslist %}
+        <table>
+            <tr>
+				<td class="label">Reservation #:</td>
+                <td><div>{{res.res_id}}</div></td>
+                <td class="label">Pick-Up:</td>
+                <td><div>{{res.checkin}}</div></td>
+                <td class="label">Return:</td>
+                <td><div>{{res.checkout}}</div></td>                
+            </tr>			
+            <tr>
+				<td class="label">User ID:</td>
+                <td><div>{{res.acc_id}}</div></td>
+                <td class="label">First Name:</td>
+                <td><div>{{user_dict[res.res_id].firstname}}</div></td>
+                <td class="label">Last Name:</td>
+                <td><div>{{user_dict[res.res_id].lastname}}</div></td>                
+            </tr>
+            <tr>
+                <td class="label">Car Id:</td>
+                <td><div>{{res.car_id}}</div></td>
+                <td class="label">Car Type:</td>
+                <td><div>{{car_dict[res.res_id].car_type}}</div></td>
+            </tr>
+            <tr>
+				<td>
+					<form method="post">
+						<input type="submit" name="delete" value="Delete">
+						<input type="hidden" name="res_id" value="{{res.res_id}}">					
+					</form>
+				</td>  
+			</tr>          
+        </table>
+        <hr>
+        {%endfor%}        
+    </body>
+ </html>
+    

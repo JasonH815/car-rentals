@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Checkout</title>
+        <style type="text/css">
+        .label {text-align: left}
+        .error {color:red}
+        td {padding: 5px}
+        </style>
+    </head>
+    
+    <body>
+	{% if not sold_out %}
+        <h4>Reservation Information</h2>     
+        <table>
+            <tr>
+                <td class="label">Type:</td>
+                <td><div>{{car_type}}</div></td>
+            </tr>
+            <tr>
+                <td class="label">Make:</td>
+                <td><div>{{car.car_make}}</div></td>
+                <td class="label">Model:</td>
+                <td><div>{{car.car_model}}</div></td>
+            </tr>
+            <tr>
+                <td class="label">Seating Capacity:</td>
+                <td><div>{{car.car_seats}}</div></td>
+                <td class="label">MPG:</td>
+                <td><div>{{car.car_mpg}}</div></td>
+            </tr> 
+              <tr>
+                <td class="label">Pick-up date:</td>
+                <td><div>{{checkin}}</div></td>
+                <td class="label">Return date:</td>
+                <td><div>{{checkout}}</div></td>
+            </tr>           
+        </table>
+        <hr>
+        <h4>Payment Information</h4>
+        <p class="error">This is a fake payment form. This information is not used in any way.</p>
+        <form method="post">
+            <table>
+                <tr>
+                    <td class="label">
+                        Name on card:                      
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>               
+                    <td class="label">
+                        Card number:                       
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">
+                        Expiration date (mm/yy):                       
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>
+                    <td class="label">
+                        CCV:                       
+                    </td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+            </table>
+            <input type="hidden" name="id_token" value="{{id_token}}">
+            <input type="submit" name="reserve_button" value="Reserve">
+        </form>
+        {% else %}
+        <span>The selected car is sold out.</span>
+        <br>
+        <span>See our other cars <a href="/browse">Here.</a></span>
+        {% endif %}        
+    </body>
+ </html>
+    

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>A-Team Rentals</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href='https://fonts.googleapis.com/css?family=Archivo+Narrow:400,700|Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+<link href="css/main.css" rel="stylesheet" type="text/css" media="all" />
+{% if admin %}
+<link href="css/2col.css" rel="stylesheet" type="text/css" media="all" />
+{% else %}
+<link href="css/wide.css" rel="stylesheet" type="text/css" media="all" />
+{% endif %}
+<link href="css/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+<script src="js/jquery-1.9.1.js"></script>
+<script src="js/jquery-ui-1.10.3.custom.js"></script>		
+<script>
+$(function() {
+	$( "#checkin" ).datepicker({
+		defaultDate: "0",
+		changeMonth: true,
+		numberOfMonths: 1,
+		onClose: function( selectedDate ) {
+			var newdate = new Date(Date.parse(selectedDate));
+			newdate.setDate(newdate.getDate() + 1);
+			$( "#checkout" ).datepicker( "option", "minDate", newdate);
+		}
+	});
+	$( "#checkout" ).datepicker({
+		defaultDate: "1",
+		changeMonth: true,
+		numberOfMonths: 1,
+		onClose: function( selectedDate ) {
+			var newdate = new Date(Date.parse(selectedDate));
+			newdate.setDate(newdate.getDate() - 1);
+			$( "#checkin" ).datepicker( "option", "maxDate", newdate );
+		}
+	});
+});
+</script>
+<style type="text/css">		
+.error {color:red}
+</style>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1><a href="/">A-Team Rentals</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li class="active"><a href="/" accesskey="1" title="">Home</a></li>
+					<li><a href="/browse" accesskey="2" title="">Browse</a></li>
+					<li><a href="/signin" accesskey="3" title="">Log-in / Register</a></li>
+					<li><a href="/account" accesskey="4" title="">Account</a></li>
+					<li><a href="/logout" accesskey="5" title="">Log-out</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="banner" class="container"><img src="img/car_banner.jpg" width="1002" height="222" alt="banner" /></div>
+	<div id="page" class="container">
+		<div id="content">
+			<div id="box1">
+				<h2 class="title">Welcome to A-Team Rentals</h2>
+				<p>Use the calandar below to view our cars!</p>
+				<form method="post">
+				<label for="checkin">Pick-Up</label>
+				<input class="box-spacer" type="text" id="checkin" name="checkin"/>
+				<label for="return">Return</label>
+				<input type="text" id="checkout" name="checkout"/>
+				<input class="button-style" type="submit" name="submit_button" value="Browse">
+				</form>
+			</div>			
+		</div>
+		{% if admin %}
+		<div id="sidebar">
+			<h2>Admin Links</h2>
+			<ul class="style3">
+				<li class="first">
+					<p class="date"><a href="/user-accounts">Accounts</a></p>
+					<p class="date"><a href="/view-cars">Cars</a></p>
+					<p class="date"><a href="/view-reservations">Reservations</a></p>
+					<p class="date"><a href="/car-init">Initialization</a></p>
+				</li>
+			</ul>
+		</div>
+		{% endif %}
+	</div>	
+	<div id="footer">
+		<p>Copyright (c)car-rentals.appspot.com. All rights reserved.</p>
+	</div>
+</div>
+</body>
+</html>

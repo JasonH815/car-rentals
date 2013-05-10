@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>All Cars</title>
+        <style type="text/css">
+        .label {text-align: left}
+        .error {color:red}
+        td {padding: 5px}
+        </style>
+        
+    </head>
+    
+    <body>
+        <h2>All Cars</h2>
+        <hr>
+            
+        {% for car in carlist %}
+        <table>
+            <tr>
+                <td class="label">Type:</td>
+                <td><div>{{car.car_type}}</div></td>
+            </tr>
+            <tr>
+                <td class="label">Make:</td>
+                <td><div>{{car.car_make}}</div></td>
+                <td class="label">Model:</td>
+                <td><div>{{car.car_model}}</div></td>
+            </tr>
+            <tr>
+                <td class="label">Seating Capacity:</td>
+                <td><div>{{car.car_seats}}</div></td>
+                <td class="label">MPG:</td>
+                <td><div>{{car.car_mpg}}</div></td>
+            </tr>
+            <tr>
+                <td><div><b>Reservations:</b><div></td>
+            </tr>
+            {% if not car.reservations %}
+				<td><div>No Reservations</div></td>
+			{% else %}
+			{% for res in car.reservations %}
+			<tr>
+				<td class="label">Reservation Number:</td>
+				<td><div>{{res_dict[res].res_id}}</div></td>
+				<td class="label">Checkin:</td>
+				<td><div>{{res_dict[res].checkin}}</div></td>
+				<td class="label">Checkout:</td>
+				<td><div>{{res_dict[res].checkout}}</div></td>
+			</tr>
+			{% endfor %}
+			{% endif %}              
+        </table>
+        {%endfor%}        
+    </body>
+ </html>
+    

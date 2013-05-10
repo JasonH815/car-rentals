@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Car Rentals!</title>
+        <style type="text/css">
+        .error {color:red}
+        </style>
+    </head>
+    
+    <body>
+        <h2>Welcome to the Car Rental Website!</h2><br>
+        <h4>Please sign in below</h4>
+        <form method="post">
+            <table>
+                <tr>
+                    <td class="label">
+                        Username:                       
+                    </td>
+                    <td class="label">
+                        Password:                       
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="username" value="{{username}}">
+                    </td>
+                    
+                    <td>
+                        <input type="password" name="password" value="{{password}}">
+                    </td>                    
+                </tr>
+                <tr>
+                    <td >
+                        <span class="error">{{p_err}}</span>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit">
+        </form>
+    </body>
+ </html>
+    

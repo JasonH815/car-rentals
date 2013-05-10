@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Car Rentals!</title>
+        <link href="css/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-ui-1.10.3.custom.js"></script>		
+		<script>
+		$(function() {
+			$( "#checkin" ).datepicker({
+				defaultDate: "0",
+				changeMonth: true,
+				numberOfMonths: 1,
+				onClose: function( selectedDate ) {
+					$( "#checkout" ).datepicker( "option", "minDate", selectedDate );
+				}
+			});
+			$( "#checkout" ).datepicker({
+				defaultDate: "1",
+				changeMonth: true,
+				numberOfMonths: 1,
+				onClose: function( selectedDate ) {
+					$( "#checkin" ).datepicker( "option", "maxDate", selectedDate );
+				}
+			});
+		});
+		</script>
+		<style type="text/css">		
+        .error {color:red}
+        </style>
+        
+    </head>
+    
+    <body>
+        <h2>Welcome to the Car Rental Website!</h2><br>
+        <a href='/siginin'>Click Here to Sign In!</a>
+        <br>
+        <a href='/signup'>Or sign up here!</a>
+        <hr>       
+        <h2>Available Cars</h2>
+        <hr>
+            
+        <form method="post">
+					<div>Economy</div>
+                    <input type="hidden" name="car_type" value="economy">
+                    {% if economy_instock %}
+                        <input type="submit" name="view" value="view_car">
+                    {% else %}
+						<div class="error">Sold Out.</div>
+					{% endif %}
+        </form>
+        <form method="post">
+					<div>Sporty</div>
+                    <input type="hidden" name="car_type" value="sporty">
+                    {% if sporty_instock %}
+                        <input type="submit" name="view" value="view_car">
+                    {% else %}
+						<div class="error">Sold Out.</div>
+					{% endif %}
+        </form>
+        <form method="post">
+					<div>Luxury</div>
+                    <input type="hidden" name="car_type" value="luxury">
+                    {% if luxury_instock %}
+                        <input type="submit" name="view" value="view_car">
+                    {% else %}
+						<div class="error">Sold Out.</div>
+					{% endif %}
+        </form>
+
+    </body>
+ </html>
+    

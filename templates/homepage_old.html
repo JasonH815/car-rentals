@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Car Rentals!</title>
+        <link href="css/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="js/jquery-ui-1.10.3.custom.js"></script>		
+		<script>
+		$(function() {
+			$( "#checkin" ).datepicker({
+				defaultDate: "0",
+				changeMonth: true,
+				numberOfMonths: 1,
+				onClose: function( selectedDate ) {
+					var newdate = new Date(Date.parse(selectedDate));
+					newdate.setDate(newdate.getDate() + 1);
+					$( "#checkout" ).datepicker( "option", "minDate", newdate);
+				}
+			});
+			$( "#checkout" ).datepicker({
+				defaultDate: "1",
+				changeMonth: true,
+				numberOfMonths: 1,
+				onClose: function( selectedDate ) {
+					var newdate = new Date(Date.parse(selectedDate));
+					newdate.setDate(newdate.getDate() - 1);
+					$( "#checkin" ).datepicker( "option", "maxDate", newdate );
+				}
+			});
+		});
+		</script>
+		<style type="text/css">		
+        .error {color:red}
+        </style>
+        
+    </head>
+    
+    <body>
+        <h2>Welcome to the Car Rental Website!</h2><br>
+        <a href='/signin'>Click Here to Sign In!</a>
+        <br>
+        <a href='/signup'>Or sign up here!</a>
+        <hr>
+        <form method="post">
+			<label for="checkin">From</label>
+			<input type="text" id="checkin" name="checkin"/>
+			<label for="return">To</label>
+			<input type="text" id="checkout" name="checkout"/>
+			<input type="submit" name="submit_button">
+        </form>      
+    </body>
+ </html>
+    

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>A-Team Rentals | Checkout</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href='https://fonts.googleapis.com/css?family=Archivo+Narrow:400,700|Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+<link href="/css/main.css" rel="stylesheet" type="text/css" media="all" />
+{% if admin %}
+<link href="/css/2col.css" rel="stylesheet" type="text/css" media="all" />
+{% else %}
+<link href="/css/wide.css" rel="stylesheet" type="text/css" media="all" />
+{% endif %}
+<link href="/css/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+<script src="/js/jquery-1.9.1.js"></script>
+<script src="/js/jquery-ui-1.10.3.custom.js"></script>		
+<script>
+$(function() {
+	$( "#checkin" ).datepicker({
+		defaultDate: "0",
+		changeMonth: true,
+		numberOfMonths: 1,
+		onClose: function( selectedDate ) {
+			var newdate = new Date(Date.parse(selectedDate));
+			newdate.setDate(newdate.getDate() + 1);
+			$( "#checkout" ).datepicker( "option", "minDate", newdate);
+		}
+	});
+	$( "#checkout" ).datepicker({
+		defaultDate: "1",
+		changeMonth: true,
+		numberOfMonths: 1,
+		onClose: function( selectedDate ) {
+			var newdate = new Date(Date.parse(selectedDate));
+			newdate.setDate(newdate.getDate() - 1);
+			$( "#checkin" ).datepicker( "option", "maxDate", newdate );
+		}
+	});
+});
+</script>
+<style type="text/css">		
+.error {color:red}
+</style>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header-wrapper">
+		<div id="header" class="container">
+			<div id="logo">
+				<h1><a href="/">A-Team Rentals</a></h1>
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="/" accesskey="1" title="">Home</a></li>
+					<li class="active"><a href="/browse" accesskey="2" title="">Browse</a></li>
+					<li><a href="/signin" accesskey="3" title="">Log-in / Register</a></li>
+					<li><a href="/account" accesskey="4" title="">Account</a></li>
+					<li><a href="/logout" accesskey="5" title="">Log-out</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="banner" class="container"><img src="/img/car_banner.jpg" width="1002" height="222" alt="banner" /></div>
+	<div id="page" class="container">
+		{% if not sold_out %}
+		<div id="content">
+			<div id="box1">
+				<h2 class="title">Reservation Details</h2>    
+				<table style="text-align:left;margin-bottom:30px">
+					<tr>
+						<td>Type:</td>
+						<td><div class="table-space">{{car.car_type}}</div></td>
+					</tr>
+					<tr>
+						<td>Make:</td>
+						<td><div class="table-space">{{car.car_make}}</div></td>
+						<td>Model:</td>
+						<td><div class="table-space">{{car.car_model}}</div></td>
+					</tr>
+					<tr>
+						<td>Seating Capacity:</td>
+						<td><div class="table-space">{{car.car_seats}}</div></td>
+						<td>MPG:</td>
+						<td><div class="table-space">{{car.car_mpg}}</div></td>
+					</tr> 
+					  <tr>
+						<td>Pick-up date:</td>
+						<td><div class="table-space">{{checkin}}</div></td>
+						<td>Return date:</td>
+						<td><div class="table-space">{{checkout}}</div></td>
+					</tr>           
+				</table>
+			</div>
+			<div style="border-top: 1px solid #000000;">
+				<ul class="style1">
+					<li class="first">
+						<h3 style="margin-bottom: 10px;">Payment Information</h3>
+						<p class="error">This is a fake payment form. This information <b><em>is not</em></b> validated, logged, or used in any way.</p>
+						<p class="error"><b>Please do not enter actual credit-card information.</b></p>
+						<form method="post">
+							<table>
+								<tr>
+									<td>
+										Name on card:                      
+									</td>
+									<td>
+										<input type="text">
+									</td>               
+									<td>
+										Card number:                       
+									</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										Expiration date (mm/yy):                       
+									</td>
+									<td>
+										<input type="text">
+									</td>
+									<td>
+										CCV:                       
+									</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+							</table>
+							<input type="hidden" name="id_token" value="{{id_token}}">
+							<input class="button-style" style="margin-top:20px;margin-left:450px;" type="submit" name="reserve_button" value="Reserve">
+						</form>
+					</li>
+				</ul>
+			</div>
+		{% else %}
+			<div id="content">
+				<div id="box1">
+					<h2 class="title">The Selected Car is Sold Out</h2>
+					<p>See our other cars <a href="/browse">Here.</a></p>
+				</div>
+			</div>
+		{% endif %}
+		</div>
+		{% if admin %}
+		<div id="sidebar">
+			<h2>Admin Links</h2>
+			<ul class="style3">
+				<li class="first">
+					<p class="date"><a href="/user-accounts">Accounts</a></p>
+					<p class="date"><a href="/view-cars">Cars</a></p>
+					<p class="date"><a href="/view-reservations">Reservations</a></p>
+					<p class="date"><a href="/car-init">Initialization</a></p>
+				</li>
+			</ul>
+		</div>
+		{% endif %}
+	</div>	
+	<div id="footer">
+		<p>Copyright (c)car-rentals.appspot.com. All rights reserved.</p>
+	</div>
+</div>
+</body>
+</html>
